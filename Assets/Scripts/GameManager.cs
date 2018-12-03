@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
@@ -25,7 +26,18 @@ public class GameManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		instance = this;
+		InitializeGame();
+	}
+
+	void InitializeGame() {
+		inGame = true;
 		InvokeRepeating("SpawnObstacle", obstacleSpawnRate, obstacleSpawnRate);
+	}
+
+	public void GameOver() {
+		inGame = false;
+		resetButton.SetActive(true);
+		CancelInvoke("SpawnObstacle");
 	}
 	
 	private void FixedUpdate() {
@@ -46,6 +58,8 @@ public class GameManager : MonoBehaviour {
 		Instantiate(obstacle, spawnPosition, Quaternion.identity);
 	}
 
-
+	public void RestartGame() {
+		SceneManager.LoadScene(0);
+	}
 
 }

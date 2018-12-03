@@ -7,7 +7,7 @@ public class ObjectRotator : MonoBehaviour {
 	public float rotationSpeed;
 
 	// Use this for initialization
-	void Start () {
+	void OnEnable () {
 		rotationSpeed = Random.Range(0.5f * rotationSpeed, 1.5f * rotationSpeed);
 	}
 	
